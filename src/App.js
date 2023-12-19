@@ -98,7 +98,7 @@ function App() {
     <Suspense fallback={<div>loading</div>}>
       <RouterProvider router={router} fallbackElement={`...loading`}>
         <Layout />
-        {/* {!session ? <Auth /> : <Account key={session.user.id} session={session} />} */}
+        {!session ? <Auth /> : <Account key={session.user.id} session={session} />}
       </RouterProvider>
     </Suspense>
       
