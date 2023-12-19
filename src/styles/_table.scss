@@ -1,0 +1,82 @@
+table {
+  &.table {
+    thead {
+      & > tr {
+        border: 1px solid #f8fafd;
+        
+        & > th {
+          background-color: #ebf0f6;
+          font-family: 'Inter Tight';
+          text-transform: uppercase;
+          font-size: .8rem;
+          font-weight: 500;
+          color: #64799d;
+          padding: 1rem .5rem;
+        }
+      }
+    }
+  }
+  &.table-striped {
+    & > tbody {
+      & > tr {
+        border-top: 1px solid #d0d7e2;
+        border-bottom: 1px solid #d0d7e2;
+
+        &:nth-of-type(even) > * {
+          // background-color: #ebf0f6;
+          background-color: rgba(235, 240, 245, .4);
+        }
+        &:nth-of-type(odd) > * {
+          // background-color: #FFF;
+        }
+
+        td {
+          border-color: rgba(222, 226, 230, 1);
+        }
+
+        // &:hover {
+        //   td {
+        //     background-color: rgba(222, 226, 230, 1);
+        //   }
+        // }
+      }
+    }
+  }
+
+  &.lokacije,
+  &.ponude {
+    th {
+      &.osvetljenjeHeadCol, &.avatarHeadCol {
+        text-align: center;
+      }
+    }
+    td {
+      vertical-align: middle;
+      padding: 1rem .5rem;
+
+      &.osvetljenjeCol, &.avatarCol {
+        text-align: center;
+      }
+    }
+
+    .img-thumbnail {
+      width: 2.5rem;
+      height: 2.5rem;
+      object-fit: cover;
+      padding: .125rem;
+    }
+
+    .badge {
+      padding: .45em .75em;
+
+      &.select {
+        font-size: $badge-font-size + .15rem;
+        padding: .5em .75em;
+      }
+      &.top {
+        font-size: $badge-font-size + .25rem;
+        padding: .55em .9em;
+      }
+    }
+  }
+}

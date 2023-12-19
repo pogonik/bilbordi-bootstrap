@@ -1,0 +1,43 @@
+.sidebar-wrapper {
+  max-width: 260px;
+
+  .sidebar {
+    background: rgba(20, 35, 70, 1);
+    position: fixed;
+    width: 260px;
+    height: 100vh;
+    left: 0;
+    top: 0;
+    padding: 0 .75rem;
+
+    .sidebar-header {
+      padding: 1.25rem 1.25rem 2rem;
+    }
+
+    .nav {
+      .nav-link {
+        margin-bottom: .35rem;
+
+        &:hover:not(.active) {
+          background: rgba(225, 240, 255, .08);
+        }
+
+        .nav-icon {
+          width: 1.0625rem;
+          margin-right: .5rem;
+          stroke: rgba(124, 217, 247, .55);
+        }
+
+        &.active {
+          .nav-icon {
+            stroke: rgba(180, 235, 255, .75);
+          }
+        }
+      }
+    }
+  }
+
+  @include media-breakpoint-down(lg) {
+    display: none;
+  }
+}

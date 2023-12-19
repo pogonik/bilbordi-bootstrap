@@ -1,0 +1,40 @@
+.navbar {
+
+  background: rgba(235, 240, 245, .4);
+  border-bottom: 1px solid #dee2e6;
+  height: 4rem;
+
+  @include media-breakpoint-down(lg) {
+    background: $sidebar-bg;
+  }
+
+  & > .container {
+
+    height: 2.5rem;
+
+    .navbar-brand {
+      display: none;
+    }
+
+    @include media-breakpoint-down(lg) {
+      justify-content: center;
+
+      .navbar-toggler {
+        position: absolute;
+        left: .5rem;
+        border: 0;
+        padding: .25rem .5rem;
+
+        &:focus {
+          box-shadow: none;
+          outline: 0;
+        }
+      }
+
+      .navbar-brand {
+        margin: 0;
+        display: block;
+      }
+    }
+  }
+}
