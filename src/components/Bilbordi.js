@@ -11,20 +11,12 @@ import {
 
 import Preloader from "./Preloader";
 import LokacijeTabela from "./LokacijeTabela";
-
+import BilbordiFilter from "./BilbordiFilter"
 import { Spinner, Container, Row, Col } from 'react-bootstrap';
 
 import localForage from "localforage";
 
-import { fetchBilbordi } from '../utils/api'
-
-const BilbordiLista = props => {
-  console.log(props.items);
-
-  let { data, strana, totalPages } = props.items;
-
-  return <LokacijeTabela data={data} strana={strana} totalPages={totalPages} />
-}
+import { fetchBilbordi, fetchBilbordiAndFilter } from '../utils/api'
 
 
 const Bilbordi = () => {
@@ -36,18 +28,19 @@ const Bilbordi = () => {
   const [perPage, setPerPage] = useState(50);
 
   const [gradFilter, setGradFilter] = useState(0);
-  const [sifraFilter, setSifraFilter] = useState('');
 
   const [bilbordiData, setBilbordiData] = useState(initData);
 
   useEffect(() => {
     setIsLoading(true)
     handleData()
-  }, [strana, perPage])
+  }, [strana, perPage, gradFilter])
 
   async function handleData() {
-    let newData = await fetchBilbordi({ strana, perPage, gradFilter, sifraFilter });
+    let newData = await fetchBilbordiAndFilter({ strana, perPage, gradFilter });
     console.log(newData);
+    console.log('gradFilter');
+    console.log(gradFilter);
     await setBilbordiData(newData.data);
     setIsLoading(false);
     setLocalForage(newData.data)
@@ -65,14 +58,12 @@ const Bilbordi = () => {
       .catch(err => console.log(err));
   }
 
-  // function filterLokacije()
-
   if(isLoading) return <Preloader />
   return (
-    <LokacijeTabela {...bilbordiData} handleData={e => setStrana(e)} />
-    // <Suspense fallback={<Preloader />}>
-    //   <LokacijeTabela {...bilbordiData} handleData={handleData} />
-    // </Suspense>
+    <>
+      <BilbordiFilter filterGrad={e => setGradFilter(parseInt(e))} gradFilter={gradFilter} />
+      <LokacijeTabela {...bilbordiData} handleData={e => setStrana(e)} />
+    </>
   )
 }
 

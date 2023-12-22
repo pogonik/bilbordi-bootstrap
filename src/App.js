@@ -1,7 +1,7 @@
 import { useState, useEffect, Suspense } from 'react'
 import { supabase, lokacije, lokacijaSifra, lokacijePoGradu, svePonude } from './utils/api'
-// import Auth from './components/Auth'
-// import Account from './components/Account'
+import Auth from './components/Auth'
+import Account from './components/Account'
 
 import Layout from './components/Layout'
 import Bilbordi from './components/Bilbordi'
@@ -36,50 +36,11 @@ function App() {
           ]}
         ]},
         {
-          // path: "bilbordi",
-          // loader: lokacije,
-          // Component: Bilbordi,
-          // children: [
-          //   {
-          //     path: "sifra",
-          //     element: () => { },
-          //     children: [
-          //       {
-          //         path: ":sifra",
-          //         loader: lokacijaSifra,
-          //         Component: Bilbordi
-          //       }
-          //     ]
-          //   },
-          //   {
-          //     path: "grad",
-          //     element: {<><Outlet /></>}
-          //   },
-          //   {
-          //     path: ":grad",
-          //     loader: lokacijePoGradu,
-          //     Component: Bilbordi,
-          //   }
-          // ]
+          path: "/novi-bilbord", Component: HomePage
+        },
+        {
+          path: "/nova-ponuda", Component: HomePage
         }
-        // {
-        //   path: "novi-bilbord",
-        //   element: <div>Hello world!</div>,
-        // },
-        // {
-        //   path: "ponude",
-        //   loader: svePonude,
-        //   Component: Ponude,
-        // },
-        // {
-        //   path: "ponude/:strana",
-        //   loader: svePonude,
-        //   Component: Ponude,
-        // },
-        // {
-        //   path: "nova-ponuda",
-        //   element: <div>Hello world!</div>,
-        // }
       ]
     }
   ]);

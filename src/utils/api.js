@@ -40,22 +40,25 @@ export const fetchBilbordi = async ({ strana = 0, perPage = 50, gradFilter = 0, 
   return defer({ data, strana, totalPages, count });
 }
 
-export const fetchBilbordiAndFilter = async ({ strana = 0, perPage = 50, gradFilter = 0, sifraFilter = '%%'}) => {
+export const fetchBilbordiAndFilter = async ({ strana = 0, perPage = 50, gradFilter = 0 }) => {
   
   let rangeFrom = strana * perPage;
   let rangeTo = rangeFrom + perPage;
 
-  let { data, error, count } = await supabase
-  .from('bilbordi')
+  let supaQuery = supabase
+    .from('bilbordi')
     .select(`*,
       grad!inner(id,naziv_grada,url_grada,
         regija!inner(id,naziv_regije,url_regije)
       )`, { count: 'exact' })
-    .eq('status', true)
-    .eq('bilbordi.grad', gradFilter)
-    .like('bilbordi.url', sifraFilter)
-    .range(rangeFrom, rangeTo)
-    .order('id', { ascending: true })
+  
+  supaQuery = supaQuery.eq('status', true);
+
+  if(gradFilter) { supaQuery = supaQuery.eq('grad', gradFilter) }
+    
+  supaQuery = supaQuery.range(rangeFrom, rangeTo).order('id', { ascending: true })
+
+  let { data, error, count } = await supaQuery
 
   let totalPages = await Math.ceil(count / perPage)
   
@@ -153,7 +156,7 @@ export const fetchPonude = async ({ strana = 0, perPage = 50, klijentFilter = 0 
   .from('ponude')
     .select('*', { count: 'exact' })
     .range(rangeFrom, rangeTo)
-    .order('id', { ascending: true })
+    .order('datum_izmene', { ascending: false })
 
   let totalPages = await Math.ceil(count / perPage)
   

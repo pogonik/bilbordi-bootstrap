@@ -1,7 +1,7 @@
 import { useState, useEffect, Suspense } from 'react'
 import { Table, FormCheck, Badge, Image, Container, Row, Col, Form, FormText, FormSelect } from "react-bootstrap"
 import Preloader from "./Preloader";
-import BilbordiFilter from "./BilbordiFilter";
+// import BilbordiFilter from "./BilbordiFilter";
 import { klase } from '../utils/lib'
 import { gradoviLista } from '../utils/api'
 import ReactPaginate from "react-paginate";
@@ -62,7 +62,7 @@ const LokacijeTabela = props => {
   return (
     <Container fluid="md">
       
-      <BilbordiFilter filterSifra={e => console.log(e)} filterGrad={e => console.log(e)} />
+      {/* <BilbordiFilter filterSifra={e => console.log(e)} filterGrad={e => console.log(e)} /> */}
 
       <Row>
         <Col>

@@ -37,32 +37,32 @@ const BilbordiFilter = props => {
   if(!gradovi.length) return <Preloader />
 
   return (
-    <div className='mb-3'>
+    <Container className='mb-3'>
       <Row>
         <Col>
           <h3 className='text-uppercase fs-5'><strong>Filtriranje i pretraga</strong></h3>
         </Col>
       </Row>
-      <Row>
+      <Form className='row'>
         <Col>
-          <FormLabel htmlFor="filterGrad">Šifra:</FormLabel>
+          <FormLabel>Šifra:</FormLabel>
           <FormControl onChange={e => props.filterSifra(e.target.value)} /> 
         </Col>
         <Col>
-          <FormLabel htmlFor="filterGrad">Grad:</FormLabel>
-          <FormSelect id="filterGrad" onChange={e => props.filterGrad(e.target.value)}>
-            <option>- Izaberite grad -</option>
+          <FormLabel>Grad:</FormLabel>
+          <FormSelect id="filterGrad" onChange={e => props.filterGrad(e.target.value)} value={props.gradFilter}>
+            <option value={0}>- Izaberite grad -</option>
             {gradovi.map(itm => <option key={itm.url_grada} value={itm.id}>{itm.naziv_grada}</option>)}
           </FormSelect>
         </Col>
         <Col>
-          <FormLabel htmlFor="filterGrad">Grad:</FormLabel>
-          <Button variant="primary">
-            <ArrowUturnLeftIcon stroke="white" width="16" strokeWidth="" /> Reset
+          <FormLabel className="d-block">Reset:</FormLabel>
+          <Button variant="primary" className='icon-link'>
+            <ArrowUturnLeftIcon width="16" strokeWidth=".135rem" /> Reset
           </Button>
         </Col>
-      </Row>
-    </div>
+      </Form>
+    </Container>
   )
 }
 

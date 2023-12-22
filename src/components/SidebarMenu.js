@@ -16,12 +16,12 @@ function SidebarMenu() {
       <NavLink className="nav-link icon-link" to="/novi-bilbord">
         <PlusCircleIcon className='nav-icon' /><span className=''>Novi Bilbord</span>
       </NavLink>
-      <NavLink className="nav-link icon-link" to="/klijenti">
+      {/* <NavLink className="nav-link icon-link" to="/klijenti">
         <UserGroupIcon className='nav-icon' /><span className=''>Klijenti</span>
       </NavLink>
       <NavLink className="nav-link icon-link" to="/novi-klijent">
         <UserPlusIcon className='nav-icon' /><span className=''>Novi Klijent</span>
-      </NavLink>
+      </NavLink> */}
       <NavLink className="nav-link icon-link" to="/ponude">
         <DocumentDuplicateIcon className='nav-icon' /><span className=''>Ponude</span>
       </NavLink>

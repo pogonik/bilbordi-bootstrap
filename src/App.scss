@@ -1,3 +1,15 @@
 @import 'styles/table';
 @import 'styles/navbar';
 @import 'styles/sidebar';
+
+.btn-primary {
+  color: $gray-200;
+  
+  &:visited {
+    color: $gray-200;
+  }
+
+  &:hover {
+    color: $white;
+  }
+}
