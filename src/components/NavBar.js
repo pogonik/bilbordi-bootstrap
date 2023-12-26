@@ -38,7 +38,7 @@ const NavBar = props => {
           <Svg fill="#fff" viewBox="0 0 150 54" height="35" className='inline-block'><Logo /></Svg>
         </Link>
 
-        <Offcanvas id="navbar" placement="start" show={visible}>
+        <Offcanvas id="navbar" placement="start" show={visible} onHide={toggleDrawer}>
           <Offcanvas.Header closeButton>
             <Offcanvas.Title>Bilbordi.rs</Offcanvas.Title>
           </Offcanvas.Header>

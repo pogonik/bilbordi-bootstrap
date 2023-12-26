@@ -13,7 +13,7 @@ import Preloader from "./Preloader";
 
 import { Button, Table, Badge, Image, Container, Row, Col, Form, FormCheck, FormText, FormSelect, FormControl, FormLabel } from "react-bootstrap"
 
-import { gradoviLista } from '../utils/api'
+import { gradoviLista, supabaseUrl, supabaseKey, supabase } from '../utils/api'
 
 import { ArrowUturnLeftIcon, ArrowPathIcon } from '@heroicons/react/24/outline'
 
@@ -25,6 +25,8 @@ const BilbordiFilter = props => {
   // const [bilbordiData, setBilbordiData] = useState(initData);
 
   useEffect(() => {
+    getRest()
+    
     getGradovi()
   }, [])
 
@@ -32,6 +34,30 @@ const BilbordiFilter = props => {
     let listaGradova = await gradoviLista();
     console.log(listaGradova);
     setGradovi(listaGradova)
+  }
+
+  async function getRest() {
+
+    let headersList = {
+      "Accept": "*/*",
+      "Prefer": "count=planned"
+    }
+
+    let params = new URLSearchParams({
+      'apikey': supabaseKey,
+      'limit': 30,
+      'status': 'is.true'
+    })
+
+    console.log(params.toString());
+
+    let pars = Object.entries(params).map(([key,val]) => `${key}=${val}`).join('&')
+
+    let res = await fetch(`${supabaseUrl}/rest/v1/bilbordi?${params.toString()}`, {
+      headers: headersList
+    });
+    let res2 = await res.json();
+    console.log(res2);
   }
 
   if(!gradovi.length) return <Preloader />
@@ -44,10 +70,10 @@ const BilbordiFilter = props => {
         </Col>
       </Row>
       <Form className='row'>
-        <Col>
+        {/* <Col>
           <FormLabel>Šifra:</FormLabel>
           <FormControl onChange={e => props.filterSifra(e.target.value)} /> 
-        </Col>
+        </Col> */}
         <Col>
           <FormLabel>Grad:</FormLabel>
           <FormSelect id="filterGrad" onChange={e => props.filterGrad(e.target.value)} value={props.gradFilter}>
@@ -55,12 +81,22 @@ const BilbordiFilter = props => {
             {gradovi.map(itm => <option key={itm.url_grada} value={itm.id}>{itm.naziv_grada}</option>)}
           </FormSelect>
         </Col>
+        <Col className='d-flex flex-wrap align-items-flex-end'>
+          <FormLabel className="d-block"></FormLabel>
+          <Form.Check
+            type="switch"
+            id="status-switch"
+            className='mb-2'
+            label="Prikaži samo aktivne lokacije"
+          />
+        </Col>
         <Col>
           <FormLabel className="d-block">Reset:</FormLabel>
           <Button variant="primary" className='icon-link'>
             <ArrowUturnLeftIcon width="16" strokeWidth=".135rem" /> Reset
           </Button>
         </Col>
+        <hr />
       </Form>
     </Container>
   )

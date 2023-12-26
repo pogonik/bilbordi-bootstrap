@@ -5,8 +5,9 @@ import Account from './components/Account'
 
 import Layout from './components/Layout'
 import Bilbordi from './components/Bilbordi'
-import Ponude from './components/Ponude'
-import HomePage from './components/HomePage'
+import Ponude from './pages/Ponude'
+import PonudeForm from './pages/PonudeForm'
+import HomePage from './pages/HomePage'
 
 import { Outlet, createBrowserRouter, createRoutesFromElements, RouterProvider, Routes, Route } from "react-router-dom";
 
@@ -39,7 +40,7 @@ function App() {
           path: "/novi-bilbord", Component: HomePage
         },
         {
-          path: "/nova-ponuda", Component: HomePage
+          path: "/nova-ponuda", Component: PonudeForm
         }
       ]
     }

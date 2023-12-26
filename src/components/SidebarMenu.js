@@ -6,7 +6,7 @@ import { HomeIcon, TvIcon, PlusCircleIcon, UserGroupIcon, UserPlusIcon, Document
 
 function SidebarMenu() {
   return (
-    <Nav defaultActiveKey="/home" className="nav nav-pills flex-column" as="nav">
+    <Nav defaultActiveKey="/home" id="sidebar-menu" className="nav nav-pills flex-column sidebar-menu" as="nav">
       <NavLink className="nav-link icon-link" to="/home">
         <HomeIcon className='nav-icon' /><span className='nav-text'>Home</span>
       </NavLink>

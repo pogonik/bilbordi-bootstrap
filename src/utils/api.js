@@ -4,9 +4,26 @@ import localForage from "localforage";
 
 export const supabaseUrl = process.env.REACT_APP_SUPABASE_URL;
 export const supabaseKey = process.env.REACT_APP_SUPABASE_KEY;
-
+export const supabaseRestBaseUrl = process.env.REACT_APP_SUPABASE_REST_BASE_URL;
 export const supabase = createClient(supabaseUrl, supabaseKey)
 
+
+
+export async function fetchData(path, settings, headers = {}) {
+  settings.apikey = supabaseKey;
+  settings = new URLSearchParams(settings)
+  let res = await fetch(`${supabaseRestBaseUrl}/${path}?${settings.toString()}`, { headers })
+  
+  return await res.json();
+}
+
+export async function fetchData2(path, settings, headers = {}) {
+  settings.apikey = supabaseKey;
+  settings = new URLSearchParams(settings)
+  let res = await fetch(`${supabaseRestBaseUrl}/${path}?${settings.toString()}`, { headers })
+  
+  return await {res: res.headers, res2: res.json()};
+}
 
 // svi gradovi iz istoimene tabele
 export const gradoviLista = async () => {
@@ -174,11 +191,15 @@ export const ponudaByID = async (id) => {
   return data;
 }
 
-export function setLocalForage(dbKey, dbValue, callback = null) {
+export async function setLocalForage(dbKey, dbValue, callback = false) {
 
-  localForage.setItem(dbKey, dbValue)
-    .then(val => console.log(val))
-    .catch(err => console.log(err));
+  let res = await localForage.setItem(dbKey, dbValue)
+  let data = await res.json();
+
+  callback();
+  return data;
+    // .then(val => console.log(val))
+    // .catch(err => console.log(err));
 }
 
 export const getLocalForage = async (dbKey, callback = null) => {

@@ -13,9 +13,14 @@
 // font-family: 'Inter', sans-serif;
 // font-family: 'Inter Tight', sans-serif;
 
+@import '~react-datepicker/dist/react-datepicker.css';
+
+// @import '../node_modules/react-datepicker/dist/react-datepicker.css'
+
+// @import '../node_modules/bootstrap/scss/bootstrap';
 @import '~bootstrap/scss/bootstrap';
 
-@import './App.scss';
+@import './App';
 
 // $spinner-width-xl: 4rem;
 // $spinner-height-xl: 4rem;

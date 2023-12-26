@@ -10,6 +10,12 @@ export const formatDatum = datumString => {
   return noviDatum.toLocaleDateString('sr-RS')
 }
 
+// dodaj određeni broj dana na datum
+export function addDays(dateObj = new Date(), numDays) {
+   dateObj.setDate(dateObj.getDate() + numDays);
+   return dateObj;
+}
+
 // konvertuj string u slug - URL safe string
 export function slugify(str) {
   return String(str)

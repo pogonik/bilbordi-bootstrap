@@ -19,5 +19,22 @@ $form-check-input-width: 1.25em;
 
 $nav-pills-link-active-bg: rgba(225, 240, 255, .25);
 
-$nav-link-color: rgba(160, 230, 255, .85);
+$link-color: #8cc9e3;
+// $link-color: rgba(160, 230, 255, .85);
+$link-color-rgb: rgba(160, 230, 255, .85);
+
+$nav-link-color: $link-color;
 $nav-link-hover-color: #FFF;
+
+// $nav-link-padding-x: 1rem;
+// $navbar-padding-x: 1rem;
+// $navbar-nav-link-padding-x: 1rem;
+// $list-group-item-padding-x: 1rem;
+
+$offcanvas-color: $link-color;
+$offcanvas-horizontal-width: 300px;
+$offcanvas-bg-color: rgba(20, 35, 70, 1);
+
+$nav-pills-link-active-color: $link-color;
+
+$btn-close-color: $link-color;

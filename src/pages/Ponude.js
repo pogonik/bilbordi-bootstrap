@@ -1,18 +1,18 @@
 import { useState, useEffect } from 'react'
 import { Link, Outlet, useLoaderData, useParams, defer, Await } from "react-router-dom";
 
-import PonudeTabela from './PonudeTabela';
-import Preloader from "./Preloader";
+import PonudeTabela from '../components/PonudeTabela';
+import Preloader from "../components/Preloader";
 
 import localForage from "localforage";
-
+import { nanoid } from 'nanoid'
 import { fetchPonude } from '../utils/api'
 
 
 
 const Ponude = () => {
 
-  let initData = { data: {}, strana: 0, totalPages: 0, perPage: 50 }
+  let initData = { data: {}, strana: 0, totalPages: 0, perPage: 50, status: true, grad: 0, selected: {}, id: nanoid(10) }
 
   const [isLoading, setIsLoading] = useState(true);
   const [strana, setStrana] = useState(0);

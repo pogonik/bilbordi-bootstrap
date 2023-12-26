@@ -8,27 +8,41 @@ import ReactPaginate from "react-paginate";
 import { SunIcon, XCircleIcon } from '@heroicons/react/24/outline'
 
 
-const TableRow = ({row}) => {
+const TableRow = props => {
 
-  let slikaSplit = row.slika.split('.');
+  let slikaSplit = props.row.slika.split('.');
   let thumbUrl = `https://bilbordi.rs/${slikaSplit[0]}_thumb.${slikaSplit[1]}`
 
-  let osvetljenje = row.osvetljenje
+  let osvetljenje = props.row.osvetljenje
     ? <SunIcon stroke="#59a211" strokeWidth=".125rem" width="20" />
     : <XCircleIcon stroke="#fd7e14" strokeWidth=".125rem" width="20" />
 
+  let checked = Boolean(props.selected.indexOf(props.row.url) > -1);
+
+  let handleCheck = () => {
+    let newSelected = checked ? props.selected.filter(e => e !== props.row.url) : props.selected.concat(props.row.url);
+    // let newSelectedData = props.row.filter(e => props.selected.includes(e.url));
+    props.handleCheck(newSelected);
+  }
+
   return (
-    <tr onClick={e => console.log(row)}>
-      <td className="checkboxCol"><FormCheck label={false} className="checkbox text-center" /></td>
+    <tr onClick={e => console.log(e)}>
+      <td className="checkboxCol">
+        <FormCheck 
+          label={false} 
+          checked={checked}
+          onChange={handleCheck}
+          className="checkbox text-center" />
+      </td>
       <td className="avatarCol d-none d-md-table-cell">
         <Image src={thumbUrl} thumbnail roundedCircle />
       </td>
-      <td className="sifraCol">{row.sifra}</td>
-      <td className="gradCol">{row.grad.naziv_grada}</td>
-      <td className="dimenzijeCol">{row.dimenzije}</td>
+      <td className="sifraCol">{props.row.sifra}</td>
+      <td className="gradCol">{props.row.grad.naziv_grada}</td>
+      <td className="dimenzijeCol">{props.row.dimenzije}</td>
       <td className="osvetljenjeCol d-none d-md-table-cell">{osvetljenje}</td>
       <td className="klasaCol d-none d-md-table-cell">
-        <Badge className={klase[row.klasa].text.toLowerCase()} bg={klase[row.klasa].bg}>{klase[row.klasa].text}</Badge>
+        <Badge className={klase[props.row.klasa].text.toLowerCase()} bg={klase[props.row.klasa].bg}>{klase[props.row.klasa].text}</Badge>
       </td>
     </tr>
   )
@@ -48,15 +62,7 @@ const paginationAttributes = {
   activeLinkClassName: "page-link"
 }
 
-const LokacijeTabela = props => {
-
-  const filterGrad = (val) => {
-    props.filterLokacije({ grad: val })
-  }
-
-  const filterSifra = (val) => {
-    props.filterLokacije({ url: `%${val}%` })
-  }
+const LokacijePonuda = props => {
 
   return (
     <Container fluid="md">
@@ -76,7 +82,7 @@ const LokacijeTabela = props => {
             </thead>
 
             <tbody>
-              {props.data.map(row => <TableRow key={row.url} row={row} id={row.url} />)}
+              {props.data.map(row => <TableRow key={`${row.url}-${props.type}`} row={row} id={row.url} selected={props.selected} handleCheck={props.handleCheck} />)}
             </tbody>
           </Table>
         </Col>
@@ -90,4 +96,4 @@ const LokacijeTabela = props => {
   )
 }
 
-export default LokacijeTabela
+export default LokacijePonuda
